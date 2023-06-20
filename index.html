@@ -1,0 +1,82 @@
+<!--om namah shivaya om Namo narayanay-->
+<!-- External sources:
+  The logo has been made by ai image creator. The HTML,CSS,JS, and play logo has been taken from fontawesome website.
+  Some google fonts are imported into it.-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeEditor</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="icon" type="img/jpeg" href="favicon.jpeg">
+    <script src="https://kit.fontawesome.com/84b0f91757.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="nav">
+        <img src="_12431e89-dd18-40f9-b090-c415199e3146.jpeg" alt="logo" class="logo">
+        <h1 class="title">codeEditor</h1>
+    </div>
+    <div class="container">
+    <div class="left">
+        <label><i class="fa-brands fa-html5" style="color: #d44a1c;"></i>HTML</label>
+        <textarea id="HTML" onkeyup="run()"></textarea>
+
+        <label><i class="fa-brands fa-css3-alt" style="color: #3779eb;"></i>CSS</label>
+        <textarea id="CSS" onkeyup="run()"></textarea>
+
+        <label><i class="fa-brands fa-js" style="color: #ead02a;"></i>Javascript</label>
+        <textarea id="javascript" onkeyup="run()"></textarea>
+    </div>
+    <div class="right">
+        <label><i class="fa-solid fa-play" style="color: #fefefe;"></i>RUN</label>
+        <iframe  id="output"></iframe>
+    </div>
+   </div>
+   <script>
+    function run(){
+    let ht=document.getElementById("HTML").value;
+    let css=document.getElementById("CSS").value;
+    let js=document.getElementById("javascript").value;
+
+    let output=document.getElementById("output");
+
+    output.contentDocument.body.innerHTML= ht + "<style>"+css+"</style>";
+    output.contentWindow.eval(js);
+    }
+
+window.addEventListener('beforeunload', function(event) {
+  var ht= document.getElementById('HTML');
+  var css = document.getElementById('CSS').value;
+  var js = document.getElementById('javascript').value;
+
+  var content = ht.value;
+
+  localStorage.setItem('htContent', content);
+  localStorage.setItem('css', css);
+  localStorage.setItem('js', js);
+});
+
+
+window.addEventListener('load', function(event) {
+  var ht = document.getElementById('HTML'); 
+  var content = localStorage.getItem('htContent');
+  var css= document.getElementById('CSS');
+  var csscon= localStorage.getItem('css');
+  var js=document.getElementById('javascript');
+  var jscon= localStorage.getItem('js');
+  if (content) {
+    ht.value = content;
+  }
+  if(css){
+    css.value =csscon;
+  }
+  if(js){
+    js.value = jscon;
+  }
+});
+
+   </script>
+</div>
+</body>
+</html>
